@@ -1,0 +1,12 @@
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.register-success {
+    color: #00d4aa;
+    font-size: 0.9rem;
+    text-align: center;
+    font-weight: 700;
+}
