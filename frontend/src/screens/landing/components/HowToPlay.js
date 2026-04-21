@@ -8,7 +8,7 @@ const HowToPlay = () => {
                 <div className="step">
                     <div className="step-number">1</div>
                     <h3>Recibe tu Rol</h3>
-                    <p>Todos reciben la misma palabra secreta... excepto el impostor que solo conoce la categoría.</p>
+                    <p>Todos reciben la misma palabra secreta... excepto el impostor.</p>
                 </div>
                 <div className="step">
                     <div className="step-number">2</div>

@@ -8,7 +8,7 @@ const HeroSection = () => {
             <p className="hero-subtitle">¿Puedes descubrir al impostor antes de que te engañe?</p>
             <p className="hero-description">
                 Juego multijugador de deducción social. Escribe palabras relacionadas con la palabra secreta,
-                vota al sospechoso y gana. ¡Pero cuidado! El impostor está entre uno de vosotros.
+                vota al sospechoso y gana. ¡Pero cuidado! El impostor está entre vosotros.
             </p>
             <div className="hero-buttons">
                 <Link to="/login" className="btn-primary">Jugar Ahora</Link>
