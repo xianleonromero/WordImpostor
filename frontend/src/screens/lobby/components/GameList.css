@@ -1,0 +1,26 @@
+.game-list {
+    flex: 1;
+}
+
+.game-list-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: #eee;
+    margin-bottom: 20px;
+}
+
+.game-list-empty {
+    color: #aaa;
+    text-align: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+}
+
+.game-list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
