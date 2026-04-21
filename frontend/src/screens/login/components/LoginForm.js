@@ -4,26 +4,18 @@ import axios from "axios"
 import "./LoginForm.css"
 
 const LoginForm = () => {
-    const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const navigate = useNavigate()
     const [loggedIn, setLoggedIn] = useOutletContext()
 
-    const onChangeEmail = (e) => {
-        setEmail(e.target.value)
-    }
-
-    const onChangePassword = (e) => {
-        setPassword(e.target.value)
-    }
-
     const onSubmit = (e) => {
         e.preventDefault()
-        if (email.length === 0 || password.length === 0) return
+        if (username.length === 0 || password.length === 0) return
 
         axios.post('http://localhost:8000/api/auth/login/', {
-            email: email,
+            username: username,
             password: password
         }).then(response => {
             localStorage.setItem('token', response.data.token)
@@ -32,7 +24,7 @@ const LoginForm = () => {
             navigate('/lobby')
         }).catch(error => {
             if (error.response && error.response.status === 401) {
-                setError('Email o contraseña incorrectos')
+                setError('Usuario o contraseña incorrectos')
             } else {
                 setError('Error al iniciar sesión')
             }
@@ -41,12 +33,12 @@ const LoginForm = () => {
 
     return <form className="login-form" onSubmit={onSubmit}>
         <div className="form-group">
-            <label>Email</label>
+            <label>Username</label>
             <input
-                type="email"
-                placeholder="usuario@ejemplo.com"
-                value={email}
-                onChange={onChangeEmail}
+                type="text"
+                placeholder="tunombre"
+                value={username}
+                onChange={e => setUsername(e.target.value)}
             />
         </div>
         <div className="form-group">
@@ -55,7 +47,7 @@ const LoginForm = () => {
                 type="password"
                 placeholder="••••••••"
                 value={password}
-                onChange={onChangePassword}
+                onChange={e => setPassword(e.target.value)}
             />
         </div>
         <p className="form-error" hidden={error.length === 0}>{error}</p>
