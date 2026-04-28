@@ -1,0 +1,115 @@
+.role-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    font-family: 'Space Mono', monospace;
+}
+
+.role-page.normal {
+    background: linear-gradient(135deg, #1a472a 0%, #2d5f3f 100%);
+}
+
+.role-page.impostor {
+    background: linear-gradient(135deg, #4a1a1a 0%, #6e2121 100%);
+}
+
+.role-container {
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+}
+
+.role-badge {
+    display: inline-block;
+    padding: 12px 35px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.normal .role-badge {
+    background: linear-gradient(135deg, #00d4aa, #00e0bb);
+}
+
+.impostor .role-badge {
+    background: linear-gradient(135deg, #e94560, #ff6b88);
+}
+
+.role-icon {
+    font-size: 6rem;
+    margin-bottom: 30px;
+}
+
+.role-secret {
+    margin-bottom: 30px;
+}
+
+.role-secret-label {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.role-secret-word {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 4rem;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.role-secret-hint {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+.role-instructions {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    text-align: left;
+    color: white;
+    line-height: 2;
+}
+
+.role-timer {
+    margin-bottom: 25px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+}
+
+.role-timer-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.3rem;
+    color: white;
+    margin-right: 10px;
+}
+
+.role-btn {
+    padding: 15px 50px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.role-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
