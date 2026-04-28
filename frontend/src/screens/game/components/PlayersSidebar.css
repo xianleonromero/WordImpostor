@@ -1,0 +1,59 @@
+.players-sidebar {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+    width: 230px;
+    flex-shrink: 0;
+    overflow-y: auto;
+}
+
+.players-sidebar-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 0.9rem;
+    color: #eee;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.sidebar-player {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin-bottom: 8px;
+}
+
+.sidebar-player.eliminated {
+    opacity: 0.4;
+}
+
+.sidebar-player-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e94560, #ff6b88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+.sidebar-player-name {
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #eee;
+}
+
+.sidebar-player-status {
+    font-size: 0.7rem;
+    color: #aaa;
+    margin-top: 2px;
+}

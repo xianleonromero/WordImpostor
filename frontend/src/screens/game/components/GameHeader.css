@@ -1,0 +1,63 @@
+.game-header {
+    padding: 15px 25px;
+    background: rgba(26, 26, 46, 0.95);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Space Mono', monospace;
+}
+
+.game-header-ronda {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: #e94560;
+}
+
+.game-header-center {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.game-header-timer {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 4px solid #e94560;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    color: #eee;
+}
+
+.game-header-timer-label {
+    font-weight: 700;
+    color: #eee;
+    font-size: 0.9rem;
+}
+
+.game-header-fase {
+    font-size: 0.75rem;
+    color: #aaa;
+}
+
+.game-header-rol {
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.game-header-rol.normal {
+    background: linear-gradient(135deg, #00d4aa, #00e0bb);
+}
+
+.game-header-rol.impostor {
+    background: linear-gradient(135deg, #e94560, #ff6b88);
+}

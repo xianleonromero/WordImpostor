@@ -1,0 +1,122 @@
+.vote-phase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.vote-phase-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+    background: linear-gradient(135deg, #e94560, #ff6b88);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+}
+
+.vote-phase-subtitle {
+    color: #aaa;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.vote-phase-secret {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+    color: #ffa500;
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+}
+
+.vote-phase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 25px;
+}
+
+.vote-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.vote-card:hover {
+    border-color: #e94560;
+    background: rgba(233, 69, 96, 0.05);
+}
+
+.vote-card.selected {
+    border-color: #e94560;
+    background: rgba(233, 69, 96, 0.2);
+}
+
+.vote-card.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.vote-card-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e94560, #ff6b88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: white;
+    margin: 0 auto 12px;
+}
+
+.vote-card-name {
+    font-size: 0.85rem;
+    color: #aaa;
+    margin-bottom: 8px;
+}
+
+.vote-card-word {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.3rem;
+    color: #e94560;
+    margin-bottom: 8px;
+}
+
+.vote-card-you {
+    font-size: 0.7rem;
+    color: #aaa;
+}
+
+.vote-phase-btn {
+    padding: 15px 50px;
+    background: linear-gradient(135deg, #e94560, #ff6b88);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.vote-phase-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.vote-phase-waiting {
+    color: #00d4aa;
+    font-size: 1rem;
+}

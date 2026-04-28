@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import "./GameCard.css"
+import axios from "axios"
 
 const GameCard = (props) => {
     const navigate = useNavigate()
@@ -10,7 +11,18 @@ const GameCard = (props) => {
             navigate('/login')
             return
         }
-        navigate('/game/' + props.game.codigo + '/waiting')
+
+        axios.post('http://localhost:8000/api/games/' + props.game.codigo + '/unirse/', {}, {
+            headers: { Authorization: 'Bearer ' + token }
+        }).then(response => {
+            navigate('/game/' + props.game.codigo + '/waiting')
+        }).catch(error => {
+            if (error.response && error.response.status === 400) {
+                alert(error.response.data.error)
+            } else {
+                alert('Error al unirse a la partida')
+            }
+        })
     }
 
     return <div className="game-card">

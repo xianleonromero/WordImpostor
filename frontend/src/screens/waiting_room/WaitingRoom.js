@@ -36,9 +36,7 @@ const WaitingRoom = () => {
 
     const onClickIniciar = () => {
         const token = localStorage.getItem('token')
-        axios.put('http://localhost:8000/api/games/' + params.codigo + '/update/', {
-            estado: 'JUGANDO'
-        }, {
+        axios.post('http://localhost:8000/api/games/' + params.codigo + '/iniciar/', {}, {
             headers: { Authorization: 'Bearer ' + token }
         }).then(() => {
             navigate('/game/' + params.codigo + '/role')

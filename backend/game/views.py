@@ -167,3 +167,44 @@ def ranking(request):
     perfiles = Perfil.objects.order_by('-puntos_totales')[:limit]
     serializer = PerfilSerializer(perfiles, many=True)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def iniciar_partida(request, codigo):
+    try:
+        partida = Partida.objects.get(codigo=codigo)
+    except Partida.DoesNotExist:
+        return Response({'error': 'Partida no encontrada'}, status=status.HTTP_404_NOT_FOUND)
+
+    if partida.creador != request.user:
+        return Response({'error': 'No tienes permiso'}, status=status.HTTP_403_FORBIDDEN)
+
+    jugadores = list(partida.jugadores.all())
+    if len(jugadores) < 3:
+        return Response({'error': 'Mínimo 3 jugadores'}, status=status.HTTP_400_BAD_REQUEST)
+
+    # Asignar roles aleatoriamente
+    import random
+    random.shuffle(jugadores)
+    num_impostores = partida.num_impostores
+
+    for i, jugador in enumerate(jugadores):
+        jugador.rol = 'IMPOSTOR' if i < num_impostores else 'NORMAL'
+        jugador.save()
+
+    # Asignar palabra secreta
+    palabras = [
+        ('Animales', 'LEÓN'), ('Animales', 'TIGRE'), ('Animales', 'ELEFANTE'),
+        ('Deportes', 'FÚTBOL'), ('Deportes', 'TENIS'), ('Deportes', 'NATACIÓN'),
+        ('Comida', 'PIZZA'), ('Comida', 'SUSHI'), ('Comida', 'PAELLA'),
+    ]
+    categoria, palabra = random.choice(palabras)
+    partida.palabra_secreta = palabra
+    partida.categoria = categoria
+    partida.estado = 'JUGANDO'
+    partida.ronda_actual = 1
+    partida.save()
+
+    serializer = PartidaSerializer(partida)
+    return Response(serializer.data)
