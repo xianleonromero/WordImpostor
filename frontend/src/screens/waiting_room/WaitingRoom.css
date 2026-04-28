@@ -1,0 +1,67 @@
+.waiting-room {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 40px 30px;
+    font-family: 'Space Mono', monospace;
+    color: #eee;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.waiting-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+    color: #eee;
+    margin-bottom: 30px;
+}
+
+.waiting-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.waiting-btn-salir {
+    flex: 1;
+    padding: 15px;
+    background: transparent;
+    color: #aaa;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.waiting-btn-salir:hover {
+    border-color: #e94560;
+    color: #e94560;
+}
+
+.waiting-btn-iniciar {
+    flex: 1;
+    padding: 15px;
+    background: linear-gradient(135deg, #e94560, #ff6b88);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.waiting-btn-iniciar:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.waiting-error {
+    color: #ff4757;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.waiting-loading {
+    color: #aaa;
+    text-align: center;
+    padding: 40px;
+}

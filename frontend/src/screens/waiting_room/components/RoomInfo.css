@@ -1,0 +1,88 @@
+.room-info {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.room-info-codigo {
+    margin-bottom: 25px;
+}
+
+.room-info-label {
+    display: block;
+    font-size: 0.8rem;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.room-info-code-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.room-info-code {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 2.5rem;
+    color: #e94560;
+    letter-spacing: 4px;
+}
+
+.room-info-copy {
+    padding: 8px 16px;
+    background: rgba(233, 69, 96, 0.2);
+    border: 2px solid #e94560;
+    border-radius: 8px;
+    color: #e94560;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.room-info-config {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.room-info-item {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+}
+
+.room-info-item-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #aaa;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.room-info-item-value {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: #eee;
+}
+
+.room-info-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.room-info-bar-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #e94560, #ff6b88);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
