@@ -1,0 +1,214 @@
+.gameend-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 40px 20px;
+    font-family: 'Space Mono', monospace;
+    color: #eee;
+}
+
+.gameend-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.gameend-banner {
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.gameend-banner.win {
+    background: linear-gradient(135deg, #1a472a, #2d5f3f);
+    border: 2px solid #00d4aa;
+}
+
+.gameend-banner.lose {
+    background: linear-gradient(135deg, #4a1a1a, #6e2121);
+    border: 2px solid #e94560;
+}
+
+.gameend-banner-icon {
+    font-size: 5rem;
+    margin-bottom: 15px;
+}
+
+.gameend-banner-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 3rem;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.gameend-banner-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+}
+
+.gameend-secret {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.gameend-secret-label {
+    color: #aaa;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.gameend-secret-word {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 3rem;
+    color: #ffa500;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+}
+
+.gameend-secret-category {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.gameend-section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: #eee;
+    margin-bottom: 15px;
+}
+
+.gameend-impostores {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.gameend-impostores-list {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.gameend-impostor-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(233, 69, 96, 0.1);
+    border: 2px solid rgba(233, 69, 96, 0.3);
+    border-radius: 10px;
+    padding: 10px 15px;
+}
+
+.gameend-impostor-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e94560, #ff6b88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+}
+
+.gameend-eliminated {
+    font-size: 0.75rem;
+    color: #aaa;
+}
+
+.gameend-tabla {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.gameend-tabla-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 10px 15px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #aaa;
+    letter-spacing: 1px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 10px;
+}
+
+.gameend-tabla-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    align-items: center;
+}
+
+.gameend-tabla-row.highlight {
+    background: rgba(233, 69, 96, 0.1);
+    border: 1px solid rgba(233, 69, 96, 0.3);
+}
+
+.gameend-tabla-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.gameend-rol {
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.gameend-rol.impostor { color: #e94560; }
+.gameend-rol.normal { color: #00d4aa; }
+
+.gameend-estado {
+    font-size: 0.85rem;
+}
+
+.gameend-estado.eliminado { color: #aaa; }
+.gameend-estado.vivo { color: #00d4aa; }
+
+.gameend-loading {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-family: 'Space Mono', monospace;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.gameend-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.gameend-btn-lobby {
+    flex: 1;
+    padding: 16px;
+    background: linear-gradient(135deg, #e94560, #ff6b88);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.gameend-btn-lobby:hover {
+    opacity: 0.9;
+}
