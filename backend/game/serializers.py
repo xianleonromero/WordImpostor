@@ -24,4 +24,4 @@ class PartidaSerializer(serializers.ModelSerializer):
     creador_username = serializers.CharField(source='creador.username', read_only=True)
     class Meta:
         model = Partida
-        fields = ['id', 'codigo', 'estado', 'categoria', 'max_jugadores', 'num_impostores', 'es_publica', 'ronda_actual', 'creador_username', 'jugadores', 'creada_en']
+        fields = ['id', 'codigo', 'estado', 'categoria', 'palabra_secreta', 'max_jugadores', 'num_impostores', 'es_publica', 'ronda_actual', 'creador_username', 'jugadores', 'creada_en']
