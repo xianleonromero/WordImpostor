@@ -208,3 +208,83 @@ def iniciar_partida(request, codigo):
 
     serializer = PartidaSerializer(partida)
     return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def enviar_palabra(request, codigo):
+    try:
+        partida = Partida.objects.get(codigo=codigo)
+        jugador = PartidaJugador.objects.get(partida=partida, usuario=request.user)
+    except (Partida.DoesNotExist, PartidaJugador.DoesNotExist):
+        return Response({'error': 'No encontrado'}, status=status.HTTP_404_NOT_FOUND)
+
+    palabra = request.data.get('palabra', '')
+    if len(palabra) > 10:
+        return Response({'error': 'Máximo 10 caracteres'}, status=status.HTTP_400_BAD_REQUEST)
+
+    jugador.palabra_escrita = palabra
+    jugador.save()
+
+    serializer = PartidaSerializer(partida)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def votar(request, codigo):
+    try:
+        partida = Partida.objects.get(codigo=codigo)
+    except Partida.DoesNotExist:
+        return Response({'error': 'No encontrado'}, status=status.HTTP_404_NOT_FOUND)
+
+    votado_username = request.data.get('votado')
+    try:
+        votado_user = User.objects.get(username=votado_username)
+        votado = PartidaJugador.objects.get(partida=partida, usuario=votado_user)
+    except (User.DoesNotExist, PartidaJugador.DoesNotExist):
+        return Response({'error': 'Jugador no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+
+    # Contar votos
+    votado.puntos_obtenidos += 1
+    votado.save()
+
+    jugadores_vivos = partida.jugadores.filter(eliminado=False)
+    total_votos = sum(j.puntos_obtenidos for j in jugadores_vivos)
+
+    if total_votos >= jugadores_vivos.count():
+        # Todos votaron, eliminar al más votado
+        mas_votado = jugadores_vivos.order_by('-puntos_obtenidos').first()
+        mas_votado.eliminado = True
+        mas_votado.save()
+
+        # Resetear votos y palabras para siguiente ronda
+        for j in partida.jugadores.all():
+            j.puntos_obtenidos = 0
+            j.palabra_escrita = ''
+            j.save()
+
+        # Verificar condición de victoria
+        impostores_vivos = partida.jugadores.filter(eliminado=False, rol='IMPOSTOR').count()
+        normales_vivos = partida.jugadores.filter(eliminado=False, rol='NORMAL').count()
+
+        if impostores_vivos == 0:
+            partida.estado = 'FINALIZADA'
+            partida.save()
+            return Response({'fin': True, 'ganador': 'NORMALES'})
+
+        if impostores_vivos >= normales_vivos:
+            partida.estado = 'FINALIZADA'
+            partida.save()
+            return Response({'fin': True, 'ganador': 'IMPOSTORES'})
+
+        # Siguiente ronda
+        if partida.ronda_actual >= 5:
+            partida.estado = 'FINALIZADA'
+            partida.save()
+            return Response({'fin': True, 'ganador': 'IMPOSTORES'})
+
+        partida.ronda_actual += 1
+        partida.save()
+        return Response({'fin': False, 'siguiente_ronda': partida.ronda_actual})
+
+    return Response({'fin': False, 'votos_recibidos': total_votos})
