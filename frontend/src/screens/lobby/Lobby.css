@@ -36,3 +36,72 @@
 .lobby-btn-crear:hover {
     opacity: 0.9;
 }
+
+.lobby-body {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 30px;
+}
+
+.lobby-sidebar {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 25px;
+    height: fit-content;
+}
+
+.lobby-ranking-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: #eee;
+    margin-bottom: 20px;
+}
+
+.lobby-ranking-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.lobby-ranking-pos {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: #e94560;
+    min-width: 25px;
+}
+
+.lobby-ranking-name {
+    flex: 1;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.lobby-ranking-pts {
+    color: #ffa500;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.lobby-ranking-empty {
+    color: #aaa;
+    text-align: center;
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .lobby-body {
+        grid-template-columns: 1fr;
+    }
+    .lobby-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+}

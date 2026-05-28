@@ -1,0 +1,58 @@
+.notfound-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    color: #eee;
+    padding: 20px;
+}
+
+.notfound-container {
+    text-align: center;
+    max-width: 500px;
+}
+
+.notfound-icon {
+    font-size: 5rem;
+    margin-bottom: 20px;
+}
+
+.notfound-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 8rem;
+    background: linear-gradient(135deg, #e94560, #ff6b88);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+    line-height: 1;
+}
+
+.notfound-subtitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.notfound-description {
+    color: #aaa;
+    line-height: 1.8;
+    margin-bottom: 40px;
+}
+
+.notfound-btn {
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #e94560, #ff6b88);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.notfound-btn:hover {
+    opacity: 0.9;
+}
