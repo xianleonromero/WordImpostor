@@ -4,11 +4,18 @@ import axios from "axios"
 
 const GameCard = (props) => {
     const navigate = useNavigate()
+    const username = localStorage.getItem('username')
+    const esMiPartida = props.game.creador_username === username
 
     const onClickUnirse = () => {
         const token = localStorage.getItem('token')
         if (!token) {
             navigate('/login')
+            return
+        }
+
+        if (esMiPartida) {
+            navigate('/game/' + props.game.codigo + '/waiting')
             return
         }
 
@@ -36,7 +43,7 @@ const GameCard = (props) => {
             <p>👑 {props.game.creador_username}</p>
         </div>
         <button className="game-card-btn" onClick={onClickUnirse}>
-            Unirse
+            {esMiPartida ? 'Entrar a mi partida' : 'Unirse'}
         </button>
     </div>
 }

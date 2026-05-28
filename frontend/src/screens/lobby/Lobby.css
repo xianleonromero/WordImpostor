@@ -95,6 +95,64 @@
     padding: 20px;
 }
 
+.lobby-join {
+    margin-bottom: 30px;
+}
+
+.lobby-join-form {
+    display: flex;
+    gap: 15px;
+}
+
+.lobby-join-input {
+    flex: 1;
+    padding: 14px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #eee;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.lobby-join-input:focus {
+    outline: none;
+    border-color: #e94560;
+}
+
+.lobby-join-input::placeholder {
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-transform: none;
+}
+
+.lobby-join-btn {
+    padding: 14px 25px;
+    background: linear-gradient(135deg, #e94560, #ff6b88);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.lobby-join-btn:hover {
+    opacity: 0.9;
+}
+
+.lobby-join-error {
+    color: #ff4757;
+    font-size: 0.85rem;
+    margin-top: 8px;
+}
+
 @media (max-width: 768px) {
     .lobby-body {
         grid-template-columns: 1fr;

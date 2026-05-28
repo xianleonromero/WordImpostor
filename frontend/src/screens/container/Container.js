@@ -1,9 +1,11 @@
 import { useState } from "react"
-import { Outlet, Link } from "react-router-dom"
+import { Outlet, Link, useNavigate } from "react-router-dom"
 import "./Container.css"
 
 const Container = () => {
-    const [loggedIn, setLoggedIn] = useState(false)
+    const [loggedIn, setLoggedIn] = useState(
+        localStorage.getItem('token') !== null
+    )
 
     const doLogout = () => {
         localStorage.removeItem('token')

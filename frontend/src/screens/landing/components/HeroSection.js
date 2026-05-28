@@ -2,6 +2,8 @@ import { Link } from "react-router-dom"
 import "./HeroSection.css"
 
 const HeroSection = () => {
+    const isLoggedIn = localStorage.getItem('token') !== null
+
     return <section className="hero">
         <div className="hero-container">
             <h1 className="hero-title">WORD IMPOSTOR</h1>
@@ -11,7 +13,9 @@ const HeroSection = () => {
                 vota al sospechoso y gana. ¡Pero cuidado! El impostor está entre vosotros.
             </p>
             <div className="hero-buttons">
-                <Link to="/login" className="btn-primary">Jugar Ahora</Link>
+                <Link to={isLoggedIn ? "/lobby" : "/login"} className="btn-primary">
+                    Jugar Ahora
+                </Link>
             </div>
         </div>
     </section>

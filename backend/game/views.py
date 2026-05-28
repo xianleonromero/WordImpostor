@@ -11,7 +11,7 @@ import string
 from .models import Partida, PartidaJugador, Perfil
 from .serializers import PartidaSerializer, PartidaJugadorSerializer, PerfilSerializer
 
-#AUTENTICACION
+# AUTENTICACION
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -49,18 +49,16 @@ def login(request):
     })
 
 
-#PARTIDAS
+# PARTIDAS
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def lista_partidas(request):
-    # Parámetro en query: ?estado=ESPERANDO
+    # Parametro query: ?estado=ESPERANDO
     estado = request.query_params.get('estado', None)
-
     partidas = Partida.objects.filter(es_publica=True)
     if estado:
         partidas = partidas.filter(estado=estado)
-
     serializer = PartidaSerializer(partidas, many=True)
     return Response(serializer.data)
 
@@ -68,6 +66,7 @@ def lista_partidas(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def crear_partida(request):
+    # Parametros en body
     max_jugadores = request.data.get('max_jugadores', 6)
     num_impostores = request.data.get('num_impostores', 1)
     es_publica = request.data.get('es_publica', True)
@@ -81,7 +80,6 @@ def crear_partida(request):
         es_publica=es_publica,
         creador=request.user
     )
-
     PartidaJugador.objects.create(partida=partida, usuario=request.user)
 
     serializer = PartidaSerializer(partida)
@@ -91,7 +89,7 @@ def crear_partida(request):
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def detalle_partida(request, codigo):
-    # Parámetro en path: /api/games/ABC123/
+    # Parametro en path: /api/games/ABC123/
     try:
         partida = Partida.objects.get(codigo=codigo)
     except Partida.DoesNotExist:
@@ -104,7 +102,7 @@ def detalle_partida(request, codigo):
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def actualizar_partida(request, codigo):
-    # Parámetro en path + body
+    # Parametros en path + body
     try:
         partida = Partida.objects.get(codigo=codigo)
     except Partida.DoesNotExist:
@@ -120,10 +118,32 @@ def actualizar_partida(request, codigo):
     return Response(serializer.data)
 
 
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def actualizar_palabra_secreta(request, codigo):
+    # Parametros en path + body
+    try:
+        partida = Partida.objects.get(codigo=codigo)
+    except Partida.DoesNotExist:
+        return Response({'error': 'Partida no encontrada'}, status=status.HTTP_404_NOT_FOUND)
+
+    if partida.creador != request.user:
+        return Response({'error': 'No tienes permiso'}, status=status.HTTP_403_FORBIDDEN)
+
+    if 'palabra_secreta' in request.data:
+        partida.palabra_secreta = request.data.get('palabra_secreta')
+    if 'categoria' in request.data:
+        partida.categoria = request.data.get('categoria')
+    partida.save()
+
+    serializer = PartidaSerializer(partida)
+    return Response(serializer.data)
+
+
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def eliminar_partida(request, codigo):
-    # Parámetro en path
+    # Parametro en path
     try:
         partida = Partida.objects.get(codigo=codigo)
     except Partida.DoesNotExist:
@@ -139,7 +159,7 @@ def eliminar_partida(request, codigo):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def unirse_partida(request, codigo):
-    # Parámetro en path
+    # Parametro en path
     try:
         partida = Partida.objects.get(codigo=codigo)
     except Partida.DoesNotExist:
@@ -154,18 +174,6 @@ def unirse_partida(request, codigo):
     PartidaJugador.objects.get_or_create(partida=partida, usuario=request.user)
 
     serializer = PartidaSerializer(partida)
-    return Response(serializer.data)
-
-
-#RANKING
-
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def ranking(request):
-    # Parámetro en query: ?limit=10
-    limit = int(request.query_params.get('limit', 10))
-    perfiles = Perfil.objects.order_by('-puntos_totales')[:limit]
-    serializer = PerfilSerializer(perfiles, many=True)
     return Response(serializer.data)
 
 
@@ -184,19 +192,14 @@ def iniciar_partida(request, codigo):
     if len(jugadores) < 3:
         return Response({'error': 'Mínimo 3 jugadores'}, status=status.HTTP_400_BAD_REQUEST)
 
-    # Asignar roles aleatoriamente
-    import random
     random.shuffle(jugadores)
-    num_impostores = partida.num_impostores
-
     for i, jugador in enumerate(jugadores):
-        jugador.rol = 'IMPOSTOR' if i < num_impostores else 'NORMAL'
+        jugador.rol = 'IMPOSTOR' if i < partida.num_impostores else 'NORMAL'
         jugador.save()
 
-    # Asignar palabra secreta
     palabras = [
-        ('Animales', 'LEÓN'), ('Animales', 'TIGRE'), ('Animales', 'ELEFANTE'),
-        ('Deportes', 'FÚTBOL'), ('Deportes', 'TENIS'), ('Deportes', 'NATACIÓN'),
+        ('Animales', 'LEON'), ('Animales', 'TIGRE'), ('Animales', 'ELEFANTE'),
+        ('Deportes', 'FUTBOL'), ('Deportes', 'TENIS'), ('Deportes', 'NATACION'),
         ('Comida', 'PIZZA'), ('Comida', 'SUSHI'), ('Comida', 'PAELLA'),
     ]
     categoria, palabra = random.choice(palabras)
@@ -208,6 +211,7 @@ def iniciar_partida(request, codigo):
 
     serializer = PartidaSerializer(partida)
     return Response(serializer.data)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -244,7 +248,6 @@ def votar(request, codigo):
     except (User.DoesNotExist, PartidaJugador.DoesNotExist):
         return Response({'error': 'Jugador no encontrado'}, status=status.HTTP_404_NOT_FOUND)
 
-    # Contar votos
     votado.puntos_obtenidos += 1
     votado.save()
 
@@ -252,35 +255,50 @@ def votar(request, codigo):
     total_votos = sum(j.puntos_obtenidos for j in jugadores_vivos)
 
     if total_votos >= jugadores_vivos.count():
-        # Todos votaron, eliminar al más votado
         mas_votado = jugadores_vivos.order_by('-puntos_obtenidos').first()
         mas_votado.eliminado = True
         mas_votado.save()
 
-        # Resetear votos y palabras para siguiente ronda
         for j in partida.jugadores.all():
             j.puntos_obtenidos = 0
             j.palabra_escrita = ''
             j.save()
 
-        # Verificar condición de victoria
         impostores_vivos = partida.jugadores.filter(eliminado=False, rol='IMPOSTOR').count()
         normales_vivos = partida.jugadores.filter(eliminado=False, rol='NORMAL').count()
+
+        def actualizar_perfiles(ganador_rol):
+            for j in partida.jugadores.all():
+                try:
+                    perfil = Perfil.objects.get(usuario=j.usuario)
+                    gano = j.rol == ganador_rol
+                    puntos = partida.ronda_actual + (3 if gano else 0)
+                    perfil.puntos_totales += puntos
+                    perfil.partidas_jugadas += 1
+                    if gano:
+                        perfil.victorias += 1
+                    else:
+                        perfil.derrotas += 1
+                    perfil.save()
+                except Perfil.DoesNotExist:
+                    pass
 
         if impostores_vivos == 0:
             partida.estado = 'FINALIZADA'
             partida.save()
+            actualizar_perfiles('NORMAL')
             return Response({'fin': True, 'ganador': 'NORMALES'})
 
         if impostores_vivos >= normales_vivos:
             partida.estado = 'FINALIZADA'
             partida.save()
+            actualizar_perfiles('IMPOSTOR')
             return Response({'fin': True, 'ganador': 'IMPOSTORES'})
 
-        # Siguiente ronda
         if partida.ronda_actual >= 5:
             partida.estado = 'FINALIZADA'
             partida.save()
+            actualizar_perfiles('IMPOSTOR')
             return Response({'fin': True, 'ganador': 'IMPOSTORES'})
 
         partida.ronda_actual += 1
@@ -288,3 +306,21 @@ def votar(request, codigo):
         return Response({'fin': False, 'siguiente_ronda': partida.ronda_actual})
 
     return Response({'fin': False, 'votos_recibidos': total_votos})
+
+
+# RANKING
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def ranking(request):
+    # Parametro query: ?limit=10
+    limit = int(request.query_params.get('limit', 10))
+    perfiles = Perfil.objects.order_by('-puntos_totales')[:limit]
+    serializer = PerfilSerializer(perfiles, many=True)
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+@permission_classes([AllowAny])
+def limpiar_partidas(request):
+    Partida.objects.filter(estado='FINALIZADA').delete()
+    return Response({'message': 'Partidas finalizadas eliminadas'})

@@ -9,8 +9,10 @@ urlpatterns = [
     # Partidas
     path('games/', views.lista_partidas),
     path('games/crear/', views.crear_partida),
+    path('games/limpiar/', views.limpiar_partidas),
     path('games/<str:codigo>/', views.detalle_partida),
     path('games/<str:codigo>/update/', views.actualizar_partida),
+    path('games/<str:codigo>/patch/', views.actualizar_palabra_secreta),
     path('games/<str:codigo>/delete/', views.eliminar_partida),
     path('games/<str:codigo>/unirse/', views.unirse_partida),
     path('games/<str:codigo>/iniciar/', views.iniciar_partida),

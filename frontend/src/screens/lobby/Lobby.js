@@ -8,6 +8,8 @@ import "./Lobby.css"
 const Lobby = () => {
     const [showModal, setShowModal] = useState(false)
     const [ranking, setRanking] = useState([])
+    const [codigo, setCodigo] = useState('')
+    const [errorCodigo, setErrorCodigo] = useState('')
     const navigate = useNavigate()
 
     const cargarRanking = () => {
@@ -31,6 +33,32 @@ const Lobby = () => {
         setShowModal(true)
     }
 
+    const onClickUnirse = (e) => {
+        e.preventDefault()
+        if (codigo.length === 0) {
+            setErrorCodigo('Introduce un código')
+            return
+        }
+        const token = localStorage.getItem('token')
+        if (!token) {
+            navigate('/login')
+            return
+        }
+        axios.post('http://localhost:8000/api/games/' + codigo.toUpperCase() + '/unirse/', {}, {
+            headers: { Authorization: 'Bearer ' + token }
+        }).then(() => {
+            navigate('/game/' + codigo.toUpperCase() + '/waiting')
+        }).catch(error => {
+            if (error.response && error.response.status === 404) {
+                setErrorCodigo('Partida no encontrada')
+            } else if (error.response && error.response.status === 400) {
+                setErrorCodigo(error.response.data.error)
+            } else {
+                setErrorCodigo('Error al unirse')
+            }
+        })
+    }
+
     return <div className="lobby">
         <div className="lobby-header">
             <h1 className="lobby-title">🎮 Lobby</h1>
@@ -38,6 +66,27 @@ const Lobby = () => {
                 + Crear Partida
             </button>
         </div>
+
+        <div className="lobby-join">
+            <form className="lobby-join-form" onSubmit={onClickUnirse}>
+                <input
+                    type="text"
+                    className="lobby-join-input"
+                    placeholder="Introduce un código de partida..."
+                    value={codigo}
+                    maxLength={6}
+                    onChange={e => {
+                        setCodigo(e.target.value.toUpperCase())
+                        setErrorCodigo('')
+                    }}
+                />
+                <button type="submit" className="lobby-join-btn">
+                    Unirse por código
+                </button>
+            </form>
+            {errorCodigo && <p className="lobby-join-error">{errorCodigo}</p>}
+        </div>
+
         <div className="lobby-body">
             <div className="lobby-main">
                 <GameList />
