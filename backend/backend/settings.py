@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-iiar78m!-f+9%jaemwwl2dosl5_o+ofqmushy_1vw)*iv9)dtp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -127,3 +128,10 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
+
+import os
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+if os.environ.get('RAILWAY_ENVIRONMENT'):
+    DEBUG = False
