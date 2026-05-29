@@ -17,6 +17,8 @@ const GameList = () => {
     }
 
     useEffect(() => {
+        axios.delete('http://localhost:8000/api/games/limpiar/')
+            .catch(error => console.log(error))
         cargarPartidas()
         const intervalo = setInterval(cargarPartidas, 3000)
         return () => clearInterval(intervalo)
